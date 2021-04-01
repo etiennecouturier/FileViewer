@@ -31,7 +31,7 @@ static void FileOps::printFiles(map<T, vector<LocalFile>> groupedFiles) {
 	for (auto group : groupedFiles) {
 		cout << group.first << "\n-----------------\n";
 		for (auto file : group.second) {
-			cout << file.getNev() << " " << file.getMeret() << "\n";
+			cout << file.getNev() << " " << file.getMeret() << "KB " << file.getDatum() << "\n";
 		}
 		cout << "\n";
 	}

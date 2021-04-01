@@ -1,4 +1,8 @@
 #include "FileOps.h"
+#include <string>
+#include <iostream>
+
+using namespace std;
 
 // https://docs.microsoft.com/en-us/windows/win32/api/minwinbase/ns-minwinbase-win32_find_dataa
 vector<LocalFile> FileOps::get_file_list(string DATA_DIR)
@@ -17,7 +21,10 @@ vector<LocalFile> FileOps::get_file_list(string DATA_DIR)
 			SYSTEMTIME sysTime;
 			FileTimeToSystemTime(&fileTime, &sysTime);
 
-			LocalFile file(fileName, fileSize);
+			int year = sysTime.wYear;
+			int month = sysTime.wMonth;
+			int day = sysTime.wDay;
+			LocalFile file(fileName, fileSize, to_string(year) + "-" + to_string(month) + "-" + to_string(day));
 			files.push_back(file);
 			//printf("%s %d %d\n", fileName.c_str(), fileSize, sysTime.wYear);
 		} while (FindNextFileA(hFind, &data));
