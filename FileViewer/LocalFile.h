@@ -16,6 +16,8 @@ public:
 
 	string getNev();
 
+	string getNevKiterjesztesNelkul();
+
 	int getMeret();
 	
 	string getDatum();

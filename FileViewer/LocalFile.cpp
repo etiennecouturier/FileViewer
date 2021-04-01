@@ -7,6 +7,11 @@ string LocalFile::getNev()
 	return nev;
 }
 
+string LocalFile::getNevKiterjesztesNelkul()
+{
+	return nev.substr(0, nev.find_last_of("."));
+}
+
 int LocalFile::getMeret()
 {
 	return meret;
