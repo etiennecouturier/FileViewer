@@ -1,6 +1,8 @@
 #include "FileOps.h"
 #include <string>
 #include <iostream>
+#include <experimental/filesystem> // C++14
+namespace fs = std::experimental::filesystem;
 
 using namespace std;
 
@@ -11,7 +13,7 @@ vector<LocalFile> FileOps::get_file_list(string DATA_DIR)
 	HANDLE hFind;
 	WIN32_FIND_DATAA data;
 
-	hFind = FindFirstFileA(DATA_DIR.c_str(), &data);
+	hFind = FindFirstFileA((DATA_DIR + "*").c_str(), &data);
 
 	if (hFind != INVALID_HANDLE_VALUE) {
 		do {
@@ -25,8 +27,9 @@ vector<LocalFile> FileOps::get_file_list(string DATA_DIR)
 			int month = sysTime.wMonth;
 			int day = sysTime.wDay;
 			LocalFile file(fileName, fileSize, to_string(year) + "-" + to_string(month) + "-" + to_string(day));
-			files.push_back(file);
-			//printf("%s %d %d\n", fileName.c_str(), fileSize, sysTime.wYear);
+
+			std::error_code ec; // For using the non-throwing overloads of functions below.
+			if (!fs::is_directory(DATA_DIR + fileName, ec))	files.push_back(file);
 		} while (FindNextFileA(hFind, &data));
 		FindClose(hFind);
 		return files;
