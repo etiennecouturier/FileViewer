@@ -19,6 +19,8 @@ public:
 	string getNevKiterjesztesNelkul();
 
 	int getMeret();
+
+	string getMeretMertekEgyseggel();
 	
 	string getDatum();
 };

@@ -20,8 +20,7 @@ public:
 	template <typename T>
 	static void printFiles(map<T, vector<LocalFile>> groupedFiles);
 
-	template <typename T>
-	static void writeToFiles(map<T, vector<LocalFile>> groupedFiles);
+	static void writeToFiles(map<string, vector<LocalFile>> groupedFiles);
 
 };
 
@@ -43,18 +42,3 @@ static void FileOps::printFiles(map<T, vector<LocalFile>> groupedFiles) {
 	}
 }
 
-template <typename T>
-static void FileOps::writeToFiles(map<T, vector<LocalFile>> groupedFiles) {
-	int fileId = 1;
-	for (auto group : groupedFiles) {
-		//(string) group.first;
-		ofstream files;
-		files.open("C:\\Temp\\" + to_string(fileId) + ".txt");
-		for (auto file : group.second) {
-			files << file.getNev() << " " << file.getMeret() << "KB " << file.getDatum() << "\n";
-		}
-		files << "\n";
-		fileId++;
-		files.close();
-	}
-}
