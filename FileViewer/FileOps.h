@@ -12,7 +12,7 @@ class FileOps
 {
 public:
 
-	static vector<LocalFile> get_file_list(string DATA_DIR);
+	static void get_file_list(string DATA_DIR, vector<LocalFile>& files);
 
 	template <typename T>
 	static map<T, vector<LocalFile>> groupFiles(vector<LocalFile> files, function<T(LocalFile)> attr);

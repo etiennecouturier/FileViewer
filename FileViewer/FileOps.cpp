@@ -7,9 +7,8 @@ namespace fs = std::experimental::filesystem;
 using namespace std;
 
 // https://docs.microsoft.com/en-us/windows/win32/api/minwinbase/ns-minwinbase-win32_find_dataa
-vector<LocalFile> FileOps::get_file_list(string DATA_DIR)
+void FileOps::get_file_list(string DATA_DIR, vector<LocalFile>& files)
 {
-	vector<LocalFile> files;
 	HANDLE hFind;
 	WIN32_FIND_DATAA data;
 
@@ -32,7 +31,6 @@ vector<LocalFile> FileOps::get_file_list(string DATA_DIR)
 			if (!fs::is_directory(DATA_DIR + fileName, ec))	files.push_back(file);
 		} while (FindNextFileA(hFind, &data));
 		FindClose(hFind);
-		return files;
 	}
 }
 

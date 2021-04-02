@@ -11,7 +11,7 @@ void prinMenu()
 	cout << "3 - datum\n";
 }
 
-function<string(LocalFile)> getFunc(int criteria) {
+function<string(LocalFile)> criteriaFunc(int criteria) {
 	switch (criteria) {
 		case 1:
 			return [](LocalFile f) -> string {return f.getNevKiterjesztesNelkul();};
@@ -32,6 +32,10 @@ int main()
 	int criteria;
 	cin >> criteria;
 
-	vector<LocalFile> files = FileOps::get_file_list(inFolder);
-	FileOps::writeToFiles(FileOps::groupFiles<string>(files, getFunc(criteria)), outFolder);
+	vector<LocalFile> files;
+	FileOps::get_file_list(inFolder, files);
+	FileOps::writeToFiles(
+		FileOps::groupFiles<string>(files, criteriaFunc(criteria)), 
+		outFolder
+	);
 }
