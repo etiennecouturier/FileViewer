@@ -36,10 +36,10 @@ vector<LocalFile> FileOps::get_file_list(string DATA_DIR)
 	}
 }
 
-void FileOps::writeToFiles(map<string, vector<LocalFile>> groupedFiles) {
+void FileOps::writeToFiles(map<string, vector<LocalFile>> groupedFiles, string outFolder) {
 	for (auto group : groupedFiles) {
 		ofstream files;
-		files.open("C:\\Temp\\" + group.first + ".txt");
+		files.open(outFolder + group.first + ".txt");
 		for (auto file : group.second) {
 			files << file.getNev() << " " << file.getMeret() << "KB " << file.getDatum() << "\n";
 		}

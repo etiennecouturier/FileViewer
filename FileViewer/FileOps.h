@@ -20,7 +20,7 @@ public:
 	template <typename T>
 	static void printFiles(map<T, vector<LocalFile>> groupedFiles);
 
-	static void writeToFiles(map<string, vector<LocalFile>> groupedFiles);
+	static void writeToFiles(map<string, vector<LocalFile>> groupedFiles, string outFolder);
 
 };
 
